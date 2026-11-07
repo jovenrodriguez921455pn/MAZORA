@@ -1,0 +1,35 @@
+{
+  "id": "/",
+  "name": "MAZORA — Your world of books",
+  "short_name": "MAZORA",
+  "description": "Discover, organize, and enjoy your personal world of books with MAZORA.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#faf9f6",
+  "theme_color": "#302033",
+  "categories": [
+    "books",
+    "education",
+    "lifestyle"
+  ],
+  "icons": [
+    {
+      "src": "icons/mazora-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/mazora-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "display_override": [
+    "fullscreen",
+    "standalone"
+  ]
+}

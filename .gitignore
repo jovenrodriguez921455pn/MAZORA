@@ -1,0 +1,15 @@
+node_modules/
+backups/
+*.backup
+index-before-*.html
+mazora-check.js
+mazora-inline-check.js
+mazora-script-*.js
+mazora-v3-design.css
+patch_*.py
+repair_*.py
+.DS_Store
+*.jks
+*.keystore
+.env
+.env.*

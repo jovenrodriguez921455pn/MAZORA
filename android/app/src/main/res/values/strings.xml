@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">MAZORA</string>
+    <string name="title_activity_main">MAZORA</string>
+    <string name="package_name">com.anchorpixel.mazora</string>
+    <string name="custom_url_scheme">com.anchorpixel.mazora</string>
+</resources>
