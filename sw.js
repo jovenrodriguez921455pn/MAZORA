@@ -1,4 +1,4 @@
-const CACHE_NAME = "mazora-app-shell-v2";
+const CACHE_NAME = "mazora-app-shell-v3";
 
 const APP_FILES = [
   "./",
@@ -26,7 +26,10 @@ self.addEventListener("activate", event => {
     caches.keys()
       .then(keys => Promise.all(
         keys
-          .filter(key => key.startsWith("mazora-app-shell-") && key !== CACHE_NAME)
+          .filter(key =>
+            key.startsWith("mazora-app-shell-") &&
+            key !== CACHE_NAME
+          )
           .map(key => caches.delete(key))
       ))
       .then(() => self.clients.claim())
@@ -42,10 +45,19 @@ self.addEventListener("fetch", event => {
 
   if (url.origin !== self.location.origin) return;
 
+  // Always fetch authentication and account scripts from the server.
+  if (
+    url.pathname.includes("/js/mazora-auth.js") ||
+    url.pathname.includes("/js/supabase-config.js") ||
+    url.pathname.includes("/js/mazora-profile-sync.js")
+  ) {
+    event.respondWith(fetch(request));
+    return;
+  }
+
   if (request.mode === "navigate") {
     event.respondWith(
       fetch(request)
-        .then(response => response)
         .catch(async () => {
           return await caches.match("./index.html");
         })

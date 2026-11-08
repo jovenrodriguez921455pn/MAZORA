@@ -237,12 +237,9 @@
     }
 
     try {
-      const redirectTo =
-        location.origin && location.origin !== "null"
-          ? location.origin + location.pathname
-          : undefined;
-
-      const options = redirectTo ? { redirectTo } : {};
+      const redirectUrl = new URL(location.pathname, location.origin);
+      redirectUrl.searchParams.set("mazora", "recovery");
+      const options = { redirectTo: redirectUrl.toString() };
 
       const { error } =
         await client.auth.resetPasswordForEmail(email, options);
@@ -411,7 +408,16 @@
 
       if (error) throw error;
 
-      renderSession(data.session);
+      const recoveryLink =
+        new URLSearchParams(location.search).get("mazora") === "recovery" ||
+        /type=recovery/i.test(location.hash || "") ||
+        /type=recovery/i.test(location.search || "");
+
+      if (recoveryLink && data.session) {
+        showRecovery(true, "Enter and confirm your new password below.");
+      } else {
+        renderSession(data.session);
+      }
 
     } catch (error) {
       status(
