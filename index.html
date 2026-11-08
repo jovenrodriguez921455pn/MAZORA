@@ -4571,6 +4571,684 @@ main > .page {
 }
 </style>
 
+<style>
+
+/* MAZORA PREMIUM DESKTOP LAYOUT — mobile styles remain unchanged */
+.mazora-desktop-sidebar { display: none; }
+@media (min-width: 800px) {
+  :root {
+    --desktop-sidebar: 258px;
+    --desktop-ink: #302033;
+    --desktop-muted: #8b7d87;
+    --desktop-line: #eee7e8;
+    --desktop-paper: #fffefd;
+  }
+
+  body {
+    background: #f8f6f3;
+    min-height: 100vh;
+  }
+
+  .mazora-desktop-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 1100;
+    width: var(--desktop-sidebar);
+    padding: 34px 22px 25px;
+    display: flex;
+    flex-direction: column;
+    background: #302033;
+    color: #fffaf8;
+    box-shadow: 8px 0 35px rgba(43, 28, 43, .08);
+  }
+
+  .desktop-brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 0 5px 38px;
+  }
+
+  .desktop-brand-mark {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #f1c6d4, #d98cae);
+    color: #302033;
+    font: bold 29px Georgia, serif;
+  }
+
+  .desktop-brand strong {
+    display: block;
+    font: bold 23px Georgia, serif;
+    letter-spacing: 1px;
+  }
+
+  .desktop-brand small {
+    display: block;
+    margin-top: 5px;
+    color: #d6c4d0;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+  }
+
+  .desktop-nav-label {
+    padding: 0 12px 13px;
+    color: #b9a6b7;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+  }
+
+  .desktop-sidebar-nav {
+    display: grid;
+    gap: 8px;
+    padding: 0;
+    border: 0;
+    overflow: visible;
+  }
+
+  .desktop-sidebar-nav button {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    min-height: 49px;
+    padding: 0 14px;
+    border: 1px solid transparent;
+    border-radius: 13px;
+    background: transparent;
+    color: #e1d5df;
+    text-align: left;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background .2s, color .2s, transform .2s;
+  }
+
+  .desktop-sidebar-nav button span {
+    width: 22px;
+    font-size: 21px;
+    text-align: center;
+  }
+
+  .desktop-sidebar-nav button:hover {
+    background: rgba(255,255,255,.08);
+    color: white;
+  }
+
+  .desktop-sidebar-nav button.active {
+    background: #f3e6eb;
+    color: #38283a;
+    border-color: rgba(255,255,255,.35);
+    font-weight: 700;
+    box-shadow: 0 5px 18px rgba(0,0,0,.12);
+  }
+
+  .desktop-sidebar-footer {
+    display: grid;
+    gap: 8px;
+    margin-top: auto;
+    padding: 20px 15px;
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 16px;
+    background: rgba(255,255,255,.055);
+  }
+
+  .desktop-footer-mark {
+    color: #e9a9c2;
+    font-size: 20px;
+  }
+
+  .desktop-sidebar-footer strong {
+    font: 17px Georgia, serif;
+  }
+
+  .desktop-sidebar-footer small {
+    color: #c9b9c7;
+    font-size: 11px;
+  }
+
+  body > header {
+    position: sticky;
+    top: 0;
+    width: calc(100% - var(--desktop-sidebar));
+    height: 88px;
+    margin-left: var(--desktop-sidebar);
+    padding: 0 clamp(32px, 5vw, 76px);
+    background: rgba(255,254,252,.94);
+    border-bottom: 1px solid var(--desktop-line);
+    box-shadow: none;
+  }
+
+  body > header .logo,
+  body > header .tagline {
+    display: none;
+  }
+
+  body > header .header-actions {
+    margin-left: auto;
+  }
+
+  #topNav,
+  body > .bottom-nav {
+    display: none !important;
+  }
+
+  body > main {
+    width: calc(100% - var(--desktop-sidebar));
+    max-width: none;
+    margin: 0 0 0 var(--desktop-sidebar);
+    padding: 38px clamp(32px, 5vw, 76px) 70px;
+  }
+
+  body > main > .page {
+    width: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+  }
+
+  .page.active {
+    animation: mazoraDesktopEnter .25s ease both;
+  }
+
+  @keyframes mazoraDesktopEnter {
+    from { opacity: .65; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  #home .home-hero {
+    min-height: 290px;
+    padding: 42px 48px;
+    border-radius: 25px;
+    background: linear-gradient(115deg, #f4e9e8 0%, #f9f0ed 54%, #eadce8 100%);
+    box-shadow: 0 12px 35px rgba(48,32,51,.055);
+  }
+
+  #home .hero-copy {
+    max-width: 58%;
+  }
+
+  #home .hero-copy h1 {
+    font-size: clamp(42px, 4vw, 58px);
+    line-height: 1.12;
+    margin: 15px 0;
+  }
+
+  #home .hero-copy p {
+    max-width: 450px;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  #home .hero-art {
+    transform: scale(1.12);
+    transform-origin: center right;
+  }
+
+  #home .home-cta-row {
+    margin-top: 22px;
+  }
+
+  #home .home-trust-row {
+    margin: 23px 0 32px;
+  }
+
+  #home .home-quick-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+    margin: 26px 0 35px;
+  }
+
+  #home .home-quick-grid button {
+    min-height: 88px;
+    padding: 18px;
+    border-radius: 17px;
+    background: var(--desktop-paper);
+    border: 1px solid var(--desktop-line);
+    box-shadow: 0 5px 18px rgba(48,32,51,.035);
+  }
+
+  #home .section-title {
+    margin: 35px 0 18px;
+  }
+
+  #home .section-title h2 {
+    font-size: 25px;
+  }
+
+  #home .card {
+    padding: 25px;
+    border: 1px solid var(--desktop-line);
+    box-shadow: 0 7px 24px rgba(48,32,51,.035);
+  }
+
+  #home .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+  }
+
+  #home .stat {
+    min-height: 112px;
+    padding: 23px;
+    border: 1px solid #eee4e5;
+    background: #fffdfb;
+  }
+
+  #home .stat strong {
+    font-size: 32px;
+  }
+
+  #home .book-grid,
+  #library #myBooks {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 19px;
+  }
+
+  .book-card {
+    padding: 14px;
+    border: 1px solid var(--desktop-line);
+    border-radius: 17px;
+    box-shadow: 0 5px 20px rgba(48,32,51,.035);
+    transition: transform .2s, box-shadow .2s;
+  }
+
+  .book-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 13px 30px rgba(48,32,51,.09);
+  }
+
+  .book-card .cover {
+    height: 215px;
+    border-radius: 10px;
+  }
+
+  #discover .book-grid,
+  #onlineResults.book-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  #library .book-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  #journal .journal-overview {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  #journal .journal-toolbar {
+    gap: 14px;
+  }
+
+  #profile .profile-section {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  body > footer {
+    margin-left: var(--desktop-sidebar);
+  }
+}
+
+</style>
+
+<style>
+/* MAZORA desktop: top navigation only */
+@media (min-width: 800px) {
+  .mazora-desktop-sidebar { display: none !important; }
+
+  body > header {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding-left: clamp(28px, 5vw, 76px) !important;
+    padding-right: clamp(28px, 5vw, 76px) !important;
+  }
+
+  body > header .logo,
+  body > header .tagline {
+    display: block !important;
+  }
+
+  #topNav {
+    display: flex !important;
+    width: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 14px clamp(28px, 5vw, 76px) 16px;
+    box-sizing: border-box;
+    justify-content: flex-start;
+    gap: 30px;
+    overflow: visible;
+  }
+
+  body > .bottom-nav {
+    display: none !important;
+  }
+
+  body > main {
+    width: 100% !important;
+    max-width: 1450px !important;
+    margin: 0 auto !important;
+    padding: 38px clamp(28px, 5vw, 76px) 70px !important;
+    box-sizing: border-box;
+  }
+
+  body > footer {
+    margin-left: 0 !important;
+  }
+}
+</style>
+
+
+<style>
+/* MAZORA PREMIUM FLOATING MOBILE NAVIGATION */
+@media (max-width: 799px) {
+  body > .bottom-nav {
+    position: fixed !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+    transform: translateX(-50%);
+    width: min(560px, calc(100% - 28px)) !important;
+    min-height: 68px;
+    box-sizing: border-box;
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: center;
+    gap: 5px;
+    padding: 8px 9px !important;
+    border: 1px solid rgba(74, 43, 65, .10) !important;
+    border-radius: 24px !important;
+    background: rgba(255, 253, 250, .96) !important;
+    box-shadow: 0 10px 32px rgba(48, 32, 51, .17) !important;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    z-index: 1200 !important;
+  }
+
+  body > .bottom-nav button {
+    min-width: 0;
+    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    padding: 5px 2px !important;
+    border: 0 !important;
+    border-radius: 16px !important;
+    background: transparent !important;
+    color: #897b86 !important;
+    font-size: 10px !important;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  body > .bottom-nav button span {
+    display: block;
+    margin: 0 !important;
+    font-size: 20px !important;
+    line-height: 1;
+  }
+
+  body > .bottom-nav button small {
+    font-size: 9px;
+    white-space: nowrap;
+  }
+
+  body > .bottom-nav button.active {
+    color: #542541 !important;
+    background: #f7e6ed !important;
+    box-shadow: inset 0 0 0 1px rgba(217, 142, 170, .18);
+  }
+
+  body > main {
+    padding-bottom: calc(105px + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+/* Desktop uses the top navigation */
+@media (min-width: 800px) {
+  body > .bottom-nav {
+    display: none !important;
+  }
+}
+</style>
+
+
+<style>
+/* MAZORA final navigation priority override */
+@media (max-width: 799px) {
+  html body > .bottom-nav {
+    display: grid !important;
+    position: fixed !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+    transform: translateX(-50%) !important;
+    width: min(560px, calc(100% - 28px)) !important;
+    min-height: 68px !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    padding: 8px 9px !important;
+    border-radius: 24px !important;
+    background: rgba(255,253,250,.97) !important;
+    border: 1px solid rgba(74,43,65,.10) !important;
+    box-shadow: 0 10px 32px rgba(48,32,51,.17) !important;
+    z-index: 1200 !important;
+  }
+
+  html body > .bottom-nav button {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    border: 0 !important;
+    border-radius: 15px !important;
+    background: transparent !important;
+    color: #897b86 !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+  }
+
+  html body > .bottom-nav button span {
+    display: block !important;
+    font-size: 20px !important;
+    margin: 0 !important;
+  }
+
+  html body > .bottom-nav button small {
+    display: block !important;
+    font-size: 9px !important;
+  }
+
+  html body > .bottom-nav button.active {
+    background: #f7e6ed !important;
+    color: #542541 !important;
+  }
+
+  body > main {
+    padding-bottom: 110px !important;
+  }
+}
+
+@media (min-width: 800px) {
+  html body > .bottom-nav {
+    display: none !important;
+  }
+}
+</style>
+
+
+<style>
+/* MAZORA HERO VISIBILITY REPAIR */
+#home .home-hero {
+  display: grid !important;
+  grid-template-columns: 1.08fr .92fr !important;
+  min-height: 350px !important;
+  overflow: hidden !important;
+}
+
+#home .hero-copy {
+  display: block !important;
+  visibility: visible !important;
+}
+
+#home .hero-art {
+  display: block !important;
+  position: relative !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 310px !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+
+#home .hero-book {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+#home .hero-orbit,
+#home .hero-spark {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+@media(max-width:760px) {
+  #home .home-hero {
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+  }
+  #home .hero-art {
+    min-height: 235px !important;
+  }
+}
+</style>
+
+
+<style id="mazora-original-photo-hero">
+#home .home-hero {
+  display: block !important;
+  position: relative !important;
+  min-height: 390px !important;
+  height: auto !important;
+  aspect-ratio: 16 / 9;
+  overflow: hidden !important;
+  border-radius: 24px !important;
+  background-color: #291528 !important;
+  background-image:
+    linear-gradient(180deg,
+      rgba(35,15,35,.72) 0%,
+      rgba(35,15,35,.38) 42%,
+      rgba(35,15,35,.08) 100%),
+    url("assets/mazora-hero.png") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+#home .home-hero .hero-art {
+  display: none !important;
+}
+#home .home-hero .hero-copy {
+  position: relative !important;
+  z-index: 2 !important;
+  width: 100% !important;
+  padding: 28px 30px !important;
+  box-sizing: border-box !important;
+}
+@media (max-width: 760px) {
+  #home .home-hero {
+    min-height: 330px !important;
+    aspect-ratio: auto !important;
+    background-position: center center !important;
+  }
+  #home .home-hero .hero-copy {
+    padding: 24px 20px !important;
+  }
+}
+</style>
+
+
+
+
+
+<style id="mazora-premium-bottom-dock">
+body .bottom-nav {
+  position: fixed !important;
+  z-index: 9999 !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
+  transform: translateX(-50%) !important;
+  width: calc(100% - 28px) !important;
+  max-width: 1050px !important;
+  min-height: 76px !important;
+  padding: 8px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-around !important;
+  gap: 7px !important;
+  background: rgba(255, 253, 250, .97) !important;
+  border: 1px solid rgba(72, 45, 65, .10) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 12px 35px rgba(48, 32, 51, .16) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+}
+
+body .bottom-nav button {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  height: 58px !important;
+  margin: 0 !important;
+  padding: 6px 3px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  border: 0 !important;
+  border-radius: 17px !important;
+  background: transparent !important;
+  color: #8b7b86 !important;
+  font-family: inherit !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: background .2s ease, color .2s ease, transform .2s ease !important;
+}
+
+body .bottom-nav button span {
+  display: block !important;
+  font-size: 21px !important;
+  line-height: 1 !important;
+  color: inherit !important;
+}
+
+body .bottom-nav button.active {
+  background: #4a2142 !important;
+  color: #fff8fb !important;
+  box-shadow: 0 5px 14px rgba(74, 33, 66, .22) !important;
+}
+
+body .bottom-nav button:active {
+  transform: scale(.95) !important;
+}
+
+body main {
+  padding-bottom: 115px !important;
+}
+</style>
+
 </head>
 <body>
 <header>
@@ -4599,6 +5277,7 @@ main > .page {
 </div>
 </div>
 </header>
+
 <nav id="topNav"><button class="active" data-page="home">Home</button><button data-page="discover">Discover</button><button data-page="library">My Library</button><button data-page="journal">Journal</button><button data-page="profile">Profile</button></nav>
 <main>
 <section class="page active" id="home">
@@ -4922,7 +5601,7 @@ main > .page {
  </div>
 </section>
 </main>
-<div class="bottom-nav"><button onclick="showPage('home')"><span>⌂</span>Home</button><button onclick="showPage('discover')"><span>⌕</span>Discover</button><button onclick="showPage('library')"><span>▤</span>Library</button><button onclick="showPage('journal')"><span>♡</span>Journal</button><button onclick="showPage('profile')"><span>◯</span>Profile</button></div>
+<div class="bottom-nav" aria-label="Mobile navigation"><button class="active" data-page="home" onclick="showPage('home')"><span>⌂</span><small>Home</small></button><button data-page="discover" onclick="showPage('discover')"><span>⌕</span><small>Discover</small></button><button data-page="library" onclick="showPage('library')"><span>▤</span><small>Library</small></button><button data-page="journal" onclick="showPage('journal')"><span>♡</span><small>Journal</small></button><button data-page="profile" onclick="showPage('profile')"><span>◯</span><small>Profile</small></button></div>
 <div id="readerOverlay" class="reader-overlay"><button id="mazoraFloatingAa" type="button" onclick="openReaderPreferences()" aria-label="Reading Preferences">Aa</button><div class="reader-top"><button onclick="closeReader()">← Back</button><strong id="readerTitle">MAZORA Reader</strong></div><div id="readerStatus">Preparing book...</div><div class="reader-stage" id="readerStage" onclick="handleReaderStageTap(event)"><div id="epubView" class="reader-hidden"></div><div id="pdfPages" class="reader-hidden" aria-label="PDF pages"></div></div><div id="pdfSearchPanel" class="pdf-search-panel reader-hidden">
  <input id="pdfSearchInput" type="search" placeholder="Search inside this book..." onkeydown="if(event.key==='Enter')searchPdfText()">
  <button type="button" onclick="searchPdfText()" aria-label="Search">⌕</button>
@@ -5547,7 +6226,7 @@ return;
 }
 document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
 document.getElementById(name).classList.add('active');
-document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
+document.querySelectorAll('nav button, .bottom-nav button, .desktop-sidebar-nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===name || b.dataset.desktopPage===name));
 window.scrollTo(0,0);
 if(name==='home'||name==='library')refresh();
 if(name==='profile')refreshProfile();
