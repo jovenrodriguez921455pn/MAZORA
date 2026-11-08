@@ -1,5 +1,16 @@
 apply plugin: 'com.android.application'
 
+def mazoraSigningVars = [
+    "MAZORA_KEYSTORE_FILE",
+    "MAZORA_KEYSTORE_PASSWORD",
+    "MAZORA_KEY_ALIAS",
+    "MAZORA_KEY_PASSWORD"
+]
+def hasMazoraReleaseSigning = mazoraSigningVars.every {
+    System.getenv(it)?.trim()
+}
+
+
 android {
     namespace = "com.anchorpixel.mazora"
     compileSdk = rootProject.ext.compileSdkVersion
@@ -16,8 +27,22 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    signingConfigs {
+        if (hasMazoraReleaseSigning) {
+            release {
+                storeFile file(System.getenv("MAZORA_KEYSTORE_FILE"))
+                storePassword System.getenv("MAZORA_KEYSTORE_PASSWORD")
+                keyAlias System.getenv("MAZORA_KEY_ALIAS")
+                keyPassword System.getenv("MAZORA_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            if (hasMazoraReleaseSigning) {
+                signingConfig signingConfigs.release
+            }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

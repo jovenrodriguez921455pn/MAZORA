@@ -13,3 +13,4 @@ repair_*.py
 *.keystore
 .env
 .env.*
+*.base64.txt

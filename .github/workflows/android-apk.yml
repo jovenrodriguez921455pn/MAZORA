@@ -1,14 +1,14 @@
-name: MAZORA Android APK
+name: MAZORA Signed Android Release
 
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
 
     steps:
       - name: Checkout repository
@@ -32,15 +32,40 @@ jobs:
       - name: Sync Android
         run: npx cap sync android
 
-      - name: Build debug APK
+      - name: Prepare signing key
+        env:
+          MAZORA_KEYSTORE_BASE64: ${{ secrets.MAZORA_KEYSTORE_BASE64 }}
+        run: |
+          test -n "$MAZORA_KEYSTORE_BASE64"
+          mkdir -p "$RUNNER_TEMP/mazora-signing"
+          echo "$MAZORA_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/mazora-signing/mazora-release.jks"
+          test -s "$RUNNER_TEMP/mazora-signing/mazora-release.jks"
+
+      - name: Build signed APK and AAB
         working-directory: android
+        env:
+          MAZORA_KEYSTORE_FILE: ${{ runner.temp }}/mazora-signing/mazora-release.jks
+          MAZORA_KEYSTORE_PASSWORD: ${{ secrets.MAZORA_KEYSTORE_PASSWORD }}
+          MAZORA_KEY_ALIAS: ${{ secrets.MAZORA_KEY_ALIAS }}
+          MAZORA_KEY_PASSWORD: ${{ secrets.MAZORA_KEY_PASSWORD }}
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
+          ./gradlew assembleRelease bundleRelease --no-daemon
 
-      - name: Upload APK
+      - name: Rename release files
+        run: |
+          mkdir -p release-output
+          cp android/app/build/outputs/apk/release/app-release.apk release-output/MAZORA-release.apk
+          cp android/app/build/outputs/bundle/release/app-release.aab release-output/MAZORA-release.aab
+
+      - name: Upload signed release files
         uses: actions/upload-artifact@v4
         with:
-          name: MAZORA-Android-Debug-APK
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: MAZORA-Signed-Release
+          path: release-output/*
           if-no-files-found: error
+          retention-days: 30
+
+      - name: Remove temporary signing key
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/mazora-signing"
