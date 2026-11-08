@@ -8,6 +8,7 @@
   let client = null;
   let mode = "signin";
   let busy = false;
+  let recoveryMode = false;
 
   const $ = id => document.getElementById(id);
 
@@ -258,6 +259,83 @@
     }
   }
 
+
+  function showRecovery(show, message) {
+    recoveryMode = !!show;
+    const panel = $("mazoraPasswordRecovery");
+
+    if (panel) panel.hidden = !recoveryMode;
+
+    if (recoveryMode) {
+      if (typeof window.showPage === "function") {
+        window.showPage("profile");
+      }
+
+      if ($("mazoraAuthGuest")) $("mazoraAuthGuest").hidden = true;
+      if ($("mazoraAuthSignedIn")) $("mazoraAuthSignedIn").hidden = true;
+      if (panel) panel.hidden = false;
+
+      if (message && $("mazoraRecoveryMessage")) {
+        $("mazoraRecoveryMessage").textContent = message;
+      }
+
+      requestAnimationFrame(() => {
+        panel?.scrollIntoView?.({ behavior: "smooth", block: "center" });
+        $("mazoraNewPassword")?.focus?.();
+      });
+    }
+  }
+
+  async function saveNewPassword(event) {
+    event.preventDefault();
+    if (!client || busy) return;
+
+    const password = $("mazoraNewPassword")?.value || "";
+    const confirm = $("mazoraConfirmPassword")?.value || "";
+
+    if (password.length < 8) {
+      return showRecovery(true, "Use at least 8 characters for your password.");
+    }
+
+    if (password !== confirm) {
+      return showRecovery(true, "The passwords do not match. Please try again.");
+    }
+
+    const button = $("mazoraRecoverySubmit");
+    busy = true;
+
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Updating…";
+    }
+
+    try {
+      const { error } = await client.auth.updateUser({ password });
+      if (error) throw error;
+
+      $("mazoraNewPassword").value = "";
+      $("mazoraConfirmPassword").value = "";
+
+      showRecovery(
+        true,
+        "Your password has been updated successfully. You can now sign in with your new password."
+      );
+
+      if ($("mazoraRecoveryForm")) {
+        $("mazoraRecoveryForm").hidden = true;
+      }
+    } catch (error) {
+      showRecovery(true, friendlyError(error));
+    } finally {
+      busy = false;
+
+      if (button) {
+        button.disabled = false;
+        button.textContent = "Update password";
+      }
+    }
+  }
+
   async function signOut() {
     if (!client) return;
 
@@ -315,9 +393,18 @@
         submit
       );
 
-      client.auth.onAuthStateChange(
-        (_event, session) => renderSession(session)
+      $("mazoraRecoveryForm")?.addEventListener(
+        "submit",
+        saveNewPassword
       );
+
+      client.auth.onAuthStateChange((event, session) => {
+        if (event === "PASSWORD_RECOVERY") {
+          showRecovery(true, "Enter and confirm your new password below.");
+        } else if (!recoveryMode) {
+          renderSession(session);
+        }
+      });
 
       const { data, error } =
         await client.auth.getSession();

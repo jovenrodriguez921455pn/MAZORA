@@ -4889,6 +4889,20 @@ main > .page {
    <button type="button" class="outline" id="mazoraAuthSignOut" onclick="mazoraAuthSignOut()">Sign out</button>
   </div>
  </div>
+ <div class="profile-section card" id="mazoraPasswordRecovery" hidden>
+   <div class="profile-section-heading">
+    <span class="profile-icon">🔒</span>
+    <div><h3>Reset your password</h3><p class="muted">Choose a new password for your MAZORA account.</p></div>
+   </div>
+   <p class="profile-note" id="mazoraRecoveryMessage" role="status" aria-live="polite">Enter and confirm your new password below.</p>
+   <form id="mazoraRecoveryForm" class="mazora-auth-form">
+    <label for="mazoraNewPassword">New password</label>
+    <input id="mazoraNewPassword" type="password" autocomplete="new-password" minlength="8" maxlength="128" required placeholder="At least 8 characters">
+    <label for="mazoraConfirmPassword">Confirm new password</label>
+    <input id="mazoraConfirmPassword" type="password" autocomplete="new-password" minlength="8" maxlength="128" required placeholder="Enter your new password again">
+    <button class="action" id="mazoraRecoverySubmit" type="submit">Update password</button>
+   </form>
+ </div>
  <div class="profile-section card" id="backupSection">
   <div class="profile-section-heading"><span class="profile-icon">⇧</span><div><h3>Backup & restore</h3><p class="muted">Keep a copy of your books and imported EPUB/PDF files on this device.</p></div></div>
   <div class="profile-note"><strong>Your library stays private.</strong><br>Backup files are created on this device. Store your backup somewhere safe. Restoring adds books to your current library; it does not erase existing books.</div>
