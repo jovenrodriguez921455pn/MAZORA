@@ -321,7 +321,20 @@
         $("mazoraRecoveryForm").hidden = true;
       }
 
-      window.alert("Password updated successfully!");
+      if (typeof window.showSuccessPopup === "function") {
+        window.showSuccessPopup(
+          "Password updated successfully!",
+          "Your MAZORA password has been changed. You can now sign in using your new password.",
+          "Continue to Profile",
+          () => {
+            if (typeof window.showPage === "function") {
+              window.showPage("profile");
+            }
+          }
+        );
+      } else {
+        status("Password updated successfully!", false);
+      }
     } catch (error) {
       showRecovery(true, friendlyError(error));
     } finally {
