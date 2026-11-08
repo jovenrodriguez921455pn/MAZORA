@@ -269,7 +269,6 @@
       }
 
       if ($("mazoraAuthGuest")) $("mazoraAuthGuest").hidden = true;
-      if ($("mazoraAuthSignedIn")) $("mazoraAuthSignedIn").hidden = true;
       if (panel) panel.hidden = false;
 
       if (message && $("mazoraRecoveryMessage")) {
@@ -321,6 +320,8 @@
       if ($("mazoraRecoveryForm")) {
         $("mazoraRecoveryForm").hidden = true;
       }
+
+      window.alert("Password updated successfully!");
     } catch (error) {
       showRecovery(true, friendlyError(error));
     } finally {
@@ -397,6 +398,7 @@
 
       client.auth.onAuthStateChange((event, session) => {
         if (event === "PASSWORD_RECOVERY") {
+          renderSession(session);
           showRecovery(true, "Enter and confirm your new password below.");
         } else if (!recoveryMode) {
           renderSession(session);
@@ -414,6 +416,7 @@
         /type=recovery/i.test(location.search || "");
 
       if (recoveryLink && data.session) {
+        renderSession(data.session);
         showRecovery(true, "Enter and confirm your new password below.");
       } else {
         renderSession(data.session);
