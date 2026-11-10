@@ -1080,7 +1080,7 @@ body.mazora-menu-in-header #topNav button{
 <script defer src="./js/mazora-auth.js"></script>
 <script defer src="./js/mazora-profile-sync.js"></script>
     <script defer src="./js/mazora-cloud-library.js"></script>
-<script defer src="./js/mazora-cloud-sync.js?v=20261105-cloud-autohide"></script>
+<script defer src="./js/mazora-cloud-sync.js?v=20261110-share-actions"></script>
 
 <style id="mazora-guest-access-css">
 body.mazora-guest-mode #readingDashboard,
@@ -5253,6 +5253,966 @@ body main {
 <style id="mazora-hide-top-navigation">
   #topNav { display: none !important; }
 </style>
+<style id="mazora-refined-controls-v1">
+
+/* MAZORA — refined buttons and form fields */
+.hero-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    margin-top: 20px !important;
+}
+
+.hero-primary,
+.hero-secondary {
+    display: inline-flex !important;
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 38px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 9px 15px !important;
+    border-radius: 10px !important;
+    font-size: 12px !important;
+    font-weight: 650 !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+}
+
+.hero-primary {
+    background: #b58b55 !important;
+    color: #182536 !important;
+    border: 1px solid #b58b55 !important;
+    box-shadow: 0 3px 10px rgba(24,37,54,.12) !important;
+}
+
+.hero-secondary {
+    background: rgba(255,255,255,.12) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255,255,255,.5) !important;
+}
+
+.hero-primary:hover,
+.hero-secondary:hover {
+    transform: translateY(-2px) !important;
+}
+
+/* Elegant textboxes and form fields */
+.form-field input,
+.form-field textarea,
+.form-field select,
+.journal-toolbar input,
+.journal-toolbar select,
+.journal-editor input,
+.journal-editor select,
+.journal-editor textarea,
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]) {
+    box-sizing: border-box !important;
+    width: 100%;
+    min-height: 45px !important;
+    padding: 12px 15px !important;
+    border: 1px solid #ded8ce !important;
+    border-radius: 12px !important;
+    background: #fffefa !important;
+    color: #26364a !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    outline: none !important;
+    box-shadow: 0 2px 7px rgba(24,37,54,.035) !important;
+    transition: border-color .2s ease, box-shadow .2s ease !important;
+}
+
+.form-field textarea,
+.journal-editor textarea {
+    min-height: 105px !important;
+    resize: vertical !important;
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus,
+.journal-toolbar input:focus,
+.journal-editor input:focus,
+.journal-editor textarea:focus,
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]):focus {
+    border-color: #b58b55 !important;
+    box-shadow: 0 0 0 3px rgba(181,139,85,.15) !important;
+    background: #fff !important;
+}
+
+.form-field label {
+    display: block !important;
+    margin-bottom: 8px !important;
+    color: #26364a !important;
+    font-size: 13px !important;
+    font-weight: 650 !important;
+}
+
+.form-field {
+    margin-bottom: 17px !important;
+}
+
+/* Consistent secondary command buttons */
+.action,
+.toolbar button,
+.backup-actions button,
+.form-select-trigger {
+    min-height: 39px !important;
+    padding: 9px 15px !important;
+    border-radius: 10px !important;
+    font-size: 12px !important;
+    font-weight: 650 !important;
+}
+
+/* Mobile: keep hero actions compact and side by side */
+@media (max-width: 700px) {
+    .hero-actions {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        flex-wrap: wrap !important;
+        gap: 9px !important;
+    }
+
+    .hero-primary,
+    .hero-secondary {
+        width: auto !important;
+        min-height: 37px !important;
+        padding: 9px 13px !important;
+        font-size: 11px !important;
+    }
+}
+
+/* Desktop: slightly more generous form controls */
+@media (min-width: 1000px) {
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+        font-size: 14px !important;
+    }
+}
+
+</style>
+<style>
+
+/* MAZORA-TITLEPAGE-ORGANIZED-V1 */
+
+/* HEADER */
+header {
+  position: relative !important;
+  top: auto !important;
+  min-height: 76px !important;
+  padding: 12px clamp(18px,5vw,65px) !important;
+  background: #fffefa !important;
+  box-shadow: 0 2px 12px rgba(24,37,54,.06) !important;
+}
+
+/* TOP NAVIGATION — all screen sizes */
+#topNav {
+  display: flex !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1050 !important;
+  width: 100% !important;
+  min-height: 58px !important;
+  margin: 0 !important;
+  padding: 8px clamp(12px,5vw,65px) !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 8px !important;
+  overflow-x: auto !important;
+  background: rgba(250,248,242,.97) !important;
+  border-top: 1px solid #eee8df !important;
+  border-bottom: 1px solid #e5dfd5 !important;
+  box-shadow: 0 5px 16px rgba(24,37,54,.05) !important;
+  scrollbar-width: none !important;
+}
+
+#topNav::-webkit-scrollbar { display:none !important; }
+
+#topNav button {
+  flex: 0 0 auto !important;
+  min-height: 39px !important;
+  padding: 9px 17px !important;
+  border: 1px solid transparent !important;
+  border-radius: 25px !important;
+  background: transparent !important;
+  color: #647080 !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
+  white-space: nowrap !important;
+}
+
+#topNav button.active {
+  background: #182536 !important;
+  color: #fff !important;
+  border-color: #182536 !important;
+}
+
+/* REMOVE BOTTOM MENU */
+.bottom-nav,
+body > .bottom-nav {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* PAGE WIDTH AND SPACING */
+main {
+  width: 100% !important;
+  max-width: 1440px !important;
+  margin: 0 auto !important;
+  padding: 30px clamp(16px,4vw,55px) 60px !important;
+}
+
+/* HERO */
+#home .home-hero {
+  display: grid !important;
+  grid-template-columns: 1.05fr .95fr !important;
+  align-items: center !important;
+  min-height: 390px !important;
+  border-radius: 25px !important;
+  overflow: hidden !important;
+  margin: 8px 0 22px !important;
+}
+
+#home .hero-copy {
+  padding: clamp(25px,4vw,55px) !important;
+}
+
+#home .hero-copy h1 {
+  font-size: clamp(36px,5vw,62px) !important;
+  line-height: 1.06 !important;
+  margin: 17px 0 !important;
+}
+
+#home .hero-copy p {
+  max-width: 440px !important;
+  line-height: 1.75 !important;
+}
+
+/* COMPACT SIDE-BY-SIDE HERO BUTTONS */
+#home .hero-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+  margin-top: 23px !important;
+}
+
+#home .hero-primary,
+#home .hero-secondary {
+  display: inline-flex !important;
+  width: auto !important;
+  min-height: 40px !important;
+  padding: 10px 16px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 24px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+}
+
+/* QUICK ACCESS */
+#home .home-quick-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3,minmax(0,1fr)) !important;
+  gap: 14px !important;
+  margin: 20px 0 32px !important;
+}
+
+#home .home-quick-grid button {
+  min-width: 0 !important;
+  min-height: 82px !important;
+  border-radius: 17px !important;
+}
+
+/* READING SECTIONS */
+#home .section-title {
+  margin: 30px 0 15px !important;
+}
+
+#home .card,
+#home .stat {
+  border: 1px solid #ece5dc !important;
+  border-radius: 19px !important;
+  box-shadow: 0 6px 20px rgba(24,37,54,.045) !important;
+}
+
+#home .stats {
+  gap: 14px !important;
+}
+
+/* TABLET AND PHONE */
+@media(max-width:700px) {
+  header {
+    min-height: 66px !important;
+    padding: 10px 17px !important;
+  }
+
+  .logo { font-size: 29px !important; }
+
+  #topNav {
+    justify-content: flex-start !important;
+    min-height: 52px !important;
+    padding: 7px 10px !important;
+    gap: 4px !important;
+  }
+
+  #topNav button {
+    min-height: 37px !important;
+    padding: 8px 12px !important;
+    font-size: 11px !important;
+  }
+
+  main {
+    padding: 18px 15px 35px !important;
+  }
+
+  #home .home-hero {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    border-radius: 20px !important;
+  }
+
+  #home .hero-copy {
+    width: 100% !important;
+    padding: 25px 21px 13px !important;
+  }
+
+  #home .hero-copy h1 {
+    font-size: clamp(35px,9vw,47px) !important;
+  }
+
+  #home .hero-art {
+    width: 100% !important;
+    min-height: 225px !important;
+  }
+
+  #home .hero-actions {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  #home .hero-primary,
+  #home .hero-secondary {
+    width: auto !important;
+    min-height: 37px !important;
+    padding: 9px 12px !important;
+    font-size: 11px !important;
+  }
+
+  #home .home-quick-grid {
+    grid-template-columns: 1fr !important;
+    gap: 9px !important;
+  }
+
+  #home .home-quick-grid button {
+    min-height: 70px !important;
+  }
+
+  #home .stats {
+    grid-template-columns: repeat(3,minmax(0,1fr)) !important;
+    gap: 8px !important;
+  }
+
+  #home .stat {
+    padding: 12px !important;
+  }
+
+  #home .stat strong {
+    font-size: 22px !important;
+  }
+
+  .book-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  #topNav button { transition:none !important; }
+}
+
+</style>
+<style id="mazora-attractive-greeting-v1">
+/* MAZORA — prominent welcome greeting */
+#homeGreeting {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  margin: 0 0 20px !important;
+  padding: 11px 19px !important;
+  border: 1px solid rgba(181,139,85,.65) !important;
+  border-radius: 30px !important;
+  background: linear-gradient(135deg, rgba(181,139,85,.25), rgba(181,139,85,.08)) !important;
+  color: #f4d49b !important;
+  font-family: Georgia, serif !important;
+  font-size: clamp(21px, 2.5vw, 29px) !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+  letter-spacing: .2px !important;
+  text-shadow: 0 2px 12px rgba(0,0,0,.2) !important;
+  box-shadow: 0 5px 18px rgba(0,0,0,.10) !important;
+}
+
+@media(max-width:700px) {
+  #homeGreeting {
+    font-size: 21px !important;
+    padding: 10px 15px !important;
+    margin-bottom: 17px !important;
+  }
+}
+</style>
+<style id="mazora-singleline-greeting-v2">
+/* MAZORA SINGLE-LINE GREETING */
+.mazora-singleline-greeting {
+  display: inline-flex !important;
+  width: max-content !important;
+  max-width: 100% !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  flex-wrap: nowrap !important;
+  font-family: 'Trebuchet MS', 'Segoe UI', sans-serif !important;
+  font-size: clamp(16px, 2vw, 21px) !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  letter-spacing: .25px !important;
+  line-height: 1.25 !important;
+  color: #f4d49b !important;
+  margin: 0 0 17px !important;
+  padding: 9px 15px !important;
+  border: 1px solid rgba(181,139,85,.55) !important;
+  border-radius: 30px !important;
+  background: rgba(24,37,54,.68) !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,.35) !important;
+  box-sizing: border-box !important;
+}
+
+@media(max-width:700px) {
+  .mazora-singleline-greeting {
+    font-size: 16px !important;
+    padding: 8px 12px !important;
+    margin-bottom: 14px !important;
+  }
+}
+</style>
+<style id="mazora-greeting-top-larger-v1">
+/* MAZORA — larger greeting at top of hero */
+#home .home-hero {
+    position: relative !important;
+}
+
+#home .hero-copy {
+    position: relative !important;
+}
+
+#home .mazora-singleline-greeting {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    display: inline-flex !important;
+    align-self: flex-start !important;
+    width: max-content !important;
+    max-width: 100% !important;
+    margin: 0 0 24px !important;
+    padding: 10px 18px !important;
+    white-space: nowrap !important;
+    font-family: 'Segoe UI', sans-serif !important;
+    font-size: clamp(21px, 2.5vw, 25px) !important;
+    font-weight: 750 !important;
+    line-height: 1.3 !important;
+    letter-spacing: .35px !important;
+    color: #f7d99e !important;
+    background: rgba(24,37,54,.72) !important;
+    border: 1px solid rgba(181,139,85,.7) !important;
+    border-radius: 30px !important;
+    text-shadow: 0 2px 8px rgba(0,0,0,.4) !important;
+    box-shadow: 0 5px 16px rgba(0,0,0,.18) !important;
+}
+
+@media(max-width:700px) {
+    #home .mazora-singleline-greeting {
+        font-size: 21px !important;
+        margin-bottom: 20px !important;
+        padding: 9px 15px !important;
+    }
+}
+</style>
+<style id="mazora-premium-hero-refinement-v3">
+
+/* MAZORA PREMIUM EDITORIAL PALETTE */
+:root {
+  --mz-navy: #182536;
+  --mz-gold: #b58b55;
+  --mz-gold-light: #f4d49b;
+  --mz-ivory: #f7f4ed;
+  --mz-plum: #542b43;
+}
+
+/* Hero positioning */
+#home .home-hero {
+  position: relative !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(181,139,85,.35) !important;
+  box-shadow: 0 12px 32px rgba(24,37,54,.12) !important;
+}
+
+#home .hero-copy {
+  position: static !important;
+}
+
+/* Greeting at the very top of the hero */
+#home .mazora-singleline-greeting {
+  position: absolute !important;
+  top: 18px !important;
+  left: clamp(18px, 4%, 45px) !important;
+  z-index: 20 !important;
+
+  display: inline-flex !important;
+  width: max-content !important;
+  max-width: calc(100% - 36px) !important;
+  white-space: nowrap !important;
+
+  margin: 0 !important;
+  padding: 11px 19px !important;
+
+  font-family: "Segoe UI", Arial, sans-serif !important;
+  font-size: clamp(19px, 2.4vw, 25px) !important;
+  font-weight: 750 !important;
+  line-height: 1.3 !important;
+  letter-spacing: .25px !important;
+
+  color: #f4d49b !important;
+  background: linear-gradient(
+    120deg,
+    rgba(24,37,54,.96),
+    rgba(39,52,68,.91)
+  ) !important;
+
+  border: 1px solid rgba(181,139,85,.85) !important;
+  border-radius: 30px !important;
+  box-shadow: 0 5px 18px rgba(0,0,0,.28) !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,.3) !important;
+}
+
+/* Improve hero headline and supporting text */
+#home .hero-copy h1 {
+  color: #fffaf0 !important;
+  text-shadow: 0 3px 12px rgba(0,0,0,.55) !important;
+}
+
+#home .hero-copy p {
+  color: #fffaf0 !important;
+  text-shadow: 0 2px 7px rgba(0,0,0,.7) !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+}
+
+/* Premium gold Explore button */
+#home .hero-primary {
+  background: linear-gradient(135deg,#d7b477,#b58b55) !important;
+  color: #182536 !important;
+  border: 1px solid #d7b477 !important;
+  box-shadow: 0 5px 14px rgba(181,139,85,.23) !important;
+}
+
+/* Midnight navy My Library button */
+#home .hero-secondary {
+  background: #182536 !important;
+  color: #f8f3e9 !important;
+  border: 1px solid #b58b55 !important;
+  box-shadow: 0 5px 14px rgba(24,37,54,.18) !important;
+}
+
+/* Consistent page background */
+body {
+  background: #f7f4ed !important;
+}
+
+/* Refined navigation */
+#topNav {
+  background: #fffdf8 !important;
+  border-bottom: 1px solid #e5dac8 !important;
+}
+
+#topNav button.active {
+  background: #182536 !important;
+  color: #f4d49b !important;
+  border: 1px solid #b58b55 !important;
+}
+
+/* Refined cards */
+#home .card,
+#home .stat {
+  background: #fffdf9 !important;
+  border: 1px solid #e9e1d5 !important;
+  box-shadow: 0 6px 20px rgba(24,37,54,.055) !important;
+}
+
+@media(max-width:700px) {
+  #home .mazora-singleline-greeting {
+    top: 13px !important;
+    left: 15px !important;
+    font-size: 19px !important;
+    padding: 9px 14px !important;
+  }
+
+  #home .hero-copy h1 {
+    font-size: clamp(32px,8vw,43px) !important;
+  }
+
+  #home .hero-copy p {
+    font-size: 13px !important;
+  }
+
+  #home .hero-primary,
+  #home .hero-secondary {
+    min-height: 39px !important;
+    padding: 9px 14px !important;
+  }
+}
+
+</style>
+<style id="mazora-greeting-true-top-v1">
+#home .home-hero {
+  position: relative !important;
+  isolation: isolate !important;
+}
+
+#home .home-hero > .mazora-greeting-top {
+  position: absolute !important;
+  top: 14px !important;
+  left: 18px !important;
+  right: auto !important;
+  z-index: 100 !important;
+  display: inline-flex !important;
+  width: max-content !important;
+  max-width: calc(100% - 36px) !important;
+  margin: 0 !important;
+  padding: 11px 19px !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  font-family: 'Segoe UI', Arial, sans-serif !important;
+  font-size: clamp(19px, 2.5vw, 25px) !important;
+  font-weight: 750 !important;
+  line-height: 1.25 !important;
+  letter-spacing: .2px !important;
+  color: #f7d99e !important;
+  background: rgba(24,37,54,.94) !important;
+  border: 1px solid #b58b55 !important;
+  border-radius: 28px !important;
+  box-shadow: 0 5px 16px rgba(0,0,0,.3) !important;
+  text-shadow: none !important;
+  box-sizing: border-box !important;
+}
+
+@media(max-width:700px) {
+  #home .home-hero > .mazora-greeting-top {
+    top: 12px !important;
+    left: 13px !important;
+    font-size: 19px !important;
+    padding: 9px 14px !important;
+  }
+}
+</style>
+<style id="mazora-correct-home-greeting-fix">
+/* FIX: TARGET THE ACTUAL MAZORA GREETING */
+#home .home-hero .hero-copy {
+    position: relative !important;
+    padding-top: 68px !important;
+}
+
+#home #homeGreeting.hero-kicker {
+    position: absolute !important;
+    top: 15px !important;
+    left: 20px !important;
+    right: auto !important;
+    display: inline-flex !important;
+    width: max-content !important;
+    max-width: calc(100% - 40px) !important;
+    margin: 0 !important;
+    padding: 11px 19px !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    font-family: 'Segoe UI', Arial, sans-serif !important;
+    font-size: 21px !important;
+    font-weight: 750 !important;
+    line-height: 1.3 !important;
+    letter-spacing: .2px !important;
+    text-transform: none !important;
+    color: #f7d99e !important;
+    background: #182536 !important;
+    border: 1px solid #b58b55 !important;
+    border-radius: 28px !important;
+    box-shadow: 0 5px 16px rgba(0,0,0,.25) !important;
+    z-index: 20 !important;
+}
+
+@media(max-width:700px) {
+    #home .home-hero .hero-copy {
+        padding-top: 68px !important;
+    }
+
+    #home #homeGreeting.hero-kicker {
+        top: 13px !important;
+        left: 15px !important;
+        font-size: 19px !important;
+        padding: 9px 14px !important;
+    }
+}
+</style>
+<style id="mazora-greeting-position-corrected-v2">
+/* MAZORA FINAL GREETING POSITION FIX */
+
+/* Make the complete hero the positioning reference */
+#home .home-hero {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* Remove the incorrect positioning reference */
+#home .home-hero .hero-copy {
+    position: static !important;
+    padding-top: 75px !important;
+}
+
+/* Place greeting at the actual top of the hero */
+#home #homeGreeting {
+    position: absolute !important;
+    top: 15px !important;
+    left: 18px !important;
+    right: auto !important;
+    bottom: auto !important;
+    z-index: 100 !important;
+
+    display: inline-flex !important;
+    width: max-content !important;
+    max-width: calc(100% - 36px) !important;
+    white-space: nowrap !important;
+
+    margin: 0 !important;
+    padding: 11px 19px !important;
+
+    font-family: 'Segoe UI', Arial, sans-serif !important;
+    font-size: 21px !important;
+    font-weight: 750 !important;
+    line-height: 1.3 !important;
+    letter-spacing: .2px !important;
+
+    color: #f7d99e !important;
+    background: #182536 !important;
+    border: 1px solid #b58b55 !important;
+    border-radius: 28px !important;
+    box-shadow: 0 5px 16px rgba(0,0,0,.3) !important;
+}
+
+@media(max-width:700px) {
+    #home .home-hero .hero-copy {
+        padding-top: 75px !important;
+    }
+
+    #home #homeGreeting {
+        top: 13px !important;
+        left: 14px !important;
+        font-size: 19px !important;
+        padding: 9px 14px !important;
+    }
+}
+</style>
+
+
+
+
+<style id="mazora-home-menu-banner-fix">
+/* Keep the header dropdown above the navigation */
+header {
+  position: relative !important;
+  z-index: 5000 !important;
+}
+#topNav {
+  position: relative;
+  z-index: 100 !important;
+}
+.mazora-menu-wrap {
+  position: relative;
+  z-index: 5100;
+}
+.mazora-dropdown {
+  z-index: 5200 !important;
+  max-height: min(75vh, 560px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Homepage editorial feature banner */
+.home-feature-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 22px 0 26px;
+  padding: 24px 22px;
+  min-height: 155px;
+  border-radius: 19px;
+  color: #fff8f2;
+  background: linear-gradient(115deg,#351b35 0%,#633451 58%,#95617d 100%);
+  box-shadow: 0 9px 24px rgba(58,31,53,.13);
+  overflow: hidden;
+}
+.home-feature-copy {flex:1;min-width:0}
+.home-feature-kicker {
+  display:block;
+  margin-bottom:9px;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  color:#f4c8dc;
+}
+.home-feature-copy h2 {
+  margin:0 0 8px;
+  color:#fff8f2;
+  font-family:Georgia,serif;
+  font-size:clamp(19px,4vw,27px);
+  line-height:1.2;
+}
+.home-feature-copy p {
+  max-width:440px;
+  margin:0 0 14px;
+  color:#f4e7ef;
+  font-size:11px;
+  line-height:1.6;
+}
+.home-feature-copy button {
+  border:0;
+  border-radius:10px;
+  padding:10px 14px;
+  background:#f8d8e6;
+  color:#48253f;
+  font-size:11px;
+  font-weight:700;
+  cursor:pointer;
+}
+.home-feature-book {
+  flex:none;
+  width:76px;
+  height:108px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:9px;
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:9px 13px 13px 9px;
+  background:linear-gradient(145deg,#e5b3a8,#87516d 75%);
+  box-shadow:5px 7px 0 rgba(30,14,30,.22);
+  transform:rotate(6deg);
+  color:#fff4e9;
+  font-family:Georgia,serif;
+}
+.home-feature-book span {font-size:13px}
+.home-feature-book small {font-size:5px;letter-spacing:1px}
+@media(max-width:420px) {
+  .home-feature-panel {padding:19px 15px;gap:10px}
+  .home-feature-book {width:60px;height:88px}
+}
+</style>
+
+
+<style id="mazora-free-reading-hub-style">
+.mazora-free-reading{
+ margin:30px 0 36px;
+ padding:24px 18px;
+ border:1px solid rgba(100,54,83,.12);
+ border-radius:22px;
+ background:linear-gradient(145deg,#fffdfb,#f8eff3);
+}
+.free-reading-heading{margin-bottom:20px}
+.free-reading-heading h2{
+ margin:7px 0;
+ color:#392039;
+ font-family:Georgia,serif;
+ font-size:clamp(23px,5vw,30px);
+}
+.free-reading-heading p,.free-reading-note{
+ color:#827580;
+ font-size:13px;
+ line-height:1.65;
+}
+.free-reading-grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,175px),1fr));
+ gap:13px;
+}
+.free-source-card{
+ min-width:0;
+ padding:17px 15px;
+ border:1px solid #eee3e9;
+ border-radius:17px;
+ background:#fff;
+ box-shadow:0 5px 16px rgba(55,28,48,.045);
+ display:flex;
+ flex-direction:column;
+ align-items:flex-start;
+}
+.free-source-icon{
+ width:43px;height:43px;
+ display:grid;place-items:center;
+ border-radius:13px;
+ background:linear-gradient(145deg,#633b5e,#a66d82);
+ color:white;
+ font-family:Georgia,serif;
+ font-size:19px;
+ margin-bottom:13px;
+}
+.free-source-type{
+ color:#a16e88;
+ font-size:9px;
+ font-weight:800;
+ letter-spacing:1px;
+}
+.free-source-card h3{
+ margin:7px 0;
+ color:#392039;
+ font-family:Georgia,serif;
+ font-size:19px;
+}
+.free-source-card p{
+ flex:1;
+ margin:0 0 16px;
+ color:#827580;
+ font-size:12px;
+ line-height:1.6;
+}
+.free-source-card button{
+ border:0;
+ border-radius:10px;
+ padding:11px 13px;
+ background:#392039;
+ color:#fff;
+ font-size:12px;
+ font-weight:700;
+ cursor:pointer;
+}
+.free-reading-note{margin:18px 0 0;font-size:11px}
+@media(max-width:380px){
+ .mazora-free-reading{padding:18px 12px}
+ .free-reading-grid{grid-template-columns:1fr 1fr;gap:9px}
+ .free-source-card{padding:13px 10px}
+ .free-source-card h3{font-size:16px}
+}
+</style>
+
 </head>
 <body>
 <header>
@@ -5305,16 +6265,24 @@ body main {
  <button class="home-cta-secondary" onclick="showPage('library')">My Library <span>→</span></button>
 </div>
 
- <div class="home-trust-row"><span>✦ Curated Discoveries</span><span>◈ Your Personal Library</span><span>♡ Made for Readers</span></div>
- <div class="home-quick-grid">
-  <button onclick="showPage('discover')"><span class="quick-icon">⌕</span><span><strong>Discover</strong><small>Find your next great read</small></span><b>↗</b></button>
-  <button onclick="showPage('library')"><span class="quick-icon">▤</span><span><strong>My collection</strong><small>Your books, beautifully organized</small></span><b>↗</b></button>
-  <button onclick="showPage('journal')"><span class="quick-icon">✎</span><span><strong>Reading journal</strong><small>Capture thoughts and reflections</small></span><b>↗</b></button>
+<section class="home-feature-panel">
+ <div class="home-feature-copy">
+  <span class="home-feature-kicker">YOUR NEXT CHAPTER STARTS HERE</span>
+  <h2>Somewhere, a story is waiting for you.</h2>
+  <p>Explore timeless classics, fresh discoveries and meaningful books from libraries around the world.</p>
+  <button type="button" onclick="showPage('discover')">Discover your next read ↗</button>
  </div>
+ <div class="home-feature-book" aria-hidden="true">
+  <span>MAZORA</span>
+  <small>YOUR WORLD OF BOOKS</small>
+ </div>
+</section>
+
+
  <div class="section-title"><h2>Continue Reading</h2><span class="link" onclick="showPage('library')">View collection →</span></div>
  <div class="card"><div class="eyebrow">CURRENTLY READING</div><div id="currentReading" class="reading-card" style="margin-top:18px"><div class="reading-cover">Your next great story</div><div><h3>Your reading journey</h3><p class="subtitle">Add your first book to begin.</p></div></div><button class="action" onclick="showPage('library')" style="margin-top:18px">Open my library</button></div>
- <div class="section-title"><h2>Your reading overview</h2></div><div class="stats"><div class="stat"><strong id="totalBooks">0</strong><p>Books added</p></div><div class="stat"><strong id="finishedBooks">0</strong><p>Books finished</p></div><div class="stat"><strong id="readingBooks">0</strong><p>Currently reading</p></div></div>
- <div class="section-title"><h2>Recently added</h2><span class="link" onclick="showPage('library')">View all →</span></div><div id="recentBooks" class="book-grid"></div>
+
+
 </section>
 <section class="page" id="discover">
  <div class="eyebrow">FIND YOUR NEXT STORY</div><h1>Discover books</h1><p class="subtitle">Explore stories from around the world.</p>
@@ -5350,6 +6318,53 @@ body main {
  <button class="action" id="onlineSearchButton" onclick="searchOnlineBooks()">Search books</button>
 </div><p id="onlineMessage" class="subtitle" aria-live="polite">Enter a title, author or keyword to search online.</p><p class="subtitle" style="font-size:11px">Search results show catalog information and provider links. Reading, borrowing, previews and purchase rights are controlled by each provider.</p></div>
  <div class="section-title"><h2>Search results</h2></div><div id="onlineResults" class="book-grid"></div>
+
+ <section class="mazora-free-reading" id="mazora-free-reading-hub">
+  <div class="free-reading-heading">
+   <span class="eyebrow">READ MORE, DISCOVER MORE</span>
+   <h2>Free Reading &amp; Audiobooks</h2>
+   <p>Explore free books, educational resources, community stories and audiobooks from around the web.</p>
+  </div>
+  <div class="free-reading-grid">
+   <article class="free-source-card">
+    <div class="free-source-icon">W</div>
+    <span class="free-source-type">COMMUNITY STORIES</span>
+    <h3>Wattpad</h3>
+    <p>Discover stories, novels and serialized fiction shared by writers.</p>
+    <button type="button" onclick="openMazoraFreeSource('wattpad')">Explore Wattpad ↗</button>
+   </article>
+   <article class="free-source-card">
+    <div class="free-source-icon">SE</div>
+    <span class="free-source-type">PUBLIC-DOMAIN BOOKS</span>
+    <h3>Standard Ebooks</h3>
+    <p>Read carefully formatted editions of public-domain literature.</p>
+    <button type="button" onclick="openMazoraFreeSource('standardebooks')">Explore ebooks ↗</button>
+   </article>
+   <article class="free-source-card">
+    <div class="free-source-icon">O</div>
+    <span class="free-source-type">EDUCATIONAL BOOKS</span>
+    <h3>OpenStax</h3>
+    <p>Access free textbooks for learning and study.</p>
+    <button type="button" onclick="openMazoraFreeSource('openstax')">Explore textbooks ↗</button>
+   </article>
+   <article class="free-source-card">
+    <div class="free-source-icon">Wk</div>
+    <span class="free-source-type">FREE TEXTS</span>
+    <h3>Wikisource</h3>
+    <p>Discover source texts and historical works in a free library.</p>
+    <button type="button" onclick="openMazoraFreeSource('wikisource')">Explore texts ↗</button>
+   </article>
+   <article class="free-source-card">
+    <div class="free-source-icon">LV</div>
+    <span class="free-source-type">AUDIOBOOKS</span>
+    <h3>LibriVox</h3>
+    <p>Listen to volunteer-recorded public-domain audiobooks.</p>
+    <button type="button" onclick="openMazoraFreeSource('librivox')">Explore audiobooks ↗</button>
+   </article>
+  </div>
+  <p class="free-reading-note">External websites control their own content, availability, accounts and usage rights. Free access does not necessarily mean every item is downloadable or available in every country.</p>
+ </section>
+
  <div class="section-title category-heading"><h2>Explore categories</h2><span class="category-intro">Find your next favorite by genre.</span></div>
 <div class="category-grid"><button type="button" class="category-card" onclick="searchCategory('fiction')" aria-label="Explore Fiction">
  <span class="category-art art-fiction"><span class="category-symbol">✦</span><span class="category-art-label">MAZORA COLLECTION</span></span>
@@ -7378,6 +8393,21 @@ function syncLibraryPickers(){
  if(filter)chooseLibraryOption('filter',filter.value);
  if(sort)chooseLibraryOption('sort',sort.value);
 }
+
+function openMazoraFreeSource(source){
+ const q=(document.getElementById('onlineSearch')?.value||'').trim();
+ const encoded=encodeURIComponent(q);
+ const urls={
+  wattpad:q?'https://www.wattpad.com/search/'+encoded:'https://www.wattpad.com/',
+  standardebooks:q?'https://www.google.com/search?q='+encodeURIComponent('site:standardebooks.org/ebooks '+q):'https://standardebooks.org/',
+  openstax:q?'https://www.google.com/search?q='+encodeURIComponent('site:openstax.org '+q):'https://openstax.org/subjects',
+  wikisource:q?'https://en.wikisource.org/w/index.php?search='+encoded:'https://en.wikisource.org/',
+  librivox:q?'https://librivox.org/search?title='+encoded:'https://librivox.org/'
+ };
+ const url=urls[source];
+ if(url)window.open(url,'_blank','noopener,noreferrer');
+}
+
 function searchCategory(query){
  const input=document.getElementById('onlineSearch');
  const select=document.getElementById('onlineSource');
@@ -8024,6 +9054,92 @@ if ('serviceWorker' in navigator) {
   });
 })();
 </script>
+
+
+<script id="mazora-greeting-fixer">
+(function () {
+  function fixGreeting() {
+    const candidates = document.querySelectorAll(
+      '#home * , .home-hero *, .hero-copy *'
+    );
+
+    candidates.forEach(function (el) {
+      if (el.children.length > 0) return;
+
+      const text = (el.textContent || '').trim();
+
+      if (/^Good\s+(morning|afternoon|evening)\b/i.test(text)) {
+        el.classList.add('mazora-singleline-greeting');
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fixGreeting);
+  } else {
+    fixGreeting();
+  }
+
+  const observer = new MutationObserver(fixGreeting);
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+})();
+</script>
+
+
+<script id="mazora-greeting-dom-position-v1">
+(function () {
+  function moveGreeting() {
+    const home = document.querySelector('#home');
+    const hero = home && home.querySelector('.home-hero');
+    if (!hero) return;
+
+    const candidates = home.querySelectorAll('*');
+    let greeting = null;
+
+    for (const el of candidates) {
+      if (el.children.length !== 0) continue;
+      const value = (el.textContent || '').trim();
+
+      if (/^Good\\s+(morning|afternoon|evening)\\b/i.test(value)) {
+        greeting = el;
+        break;
+      }
+    }
+
+    if (!greeting) return;
+
+    greeting.classList.add('mazora-greeting-top');
+
+    if (greeting.parentElement !== hero) {
+      hero.prepend(greeting);
+    }
+  }
+
+  function start() {
+    moveGreeting();
+
+    const observer = new MutationObserver(moveGreeting);
+    observer.observe(document.querySelector('#home') || document.body, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+})();
+</script>
+
+
+
 
 </body>
 </html>
